@@ -1,5 +1,5 @@
 <div class="form-group row">
-  
+
   <div class="col-4">
     <label for="category">Category filter: </label>
     <select class="form-control" name="category" id="category">
@@ -13,14 +13,20 @@
     <label for="">Create a new one</label>
     <button class="btn btn-success btn-block">Add new</button>
   </div>
+
 </div>
 
-<div *ngFor="let item of news" class="row list-item">
-  <div class="col-4">
-    <h4>{{item.title}}</h4>
-    <p>Category: {{item.category}}</p>
+<div class="container-fluid">
+
+  <div *ngFor="let item of news" class="row list-item">
+    <div class="col-4">
+      <h4>{{item.title}}</h4>
+      <p>Category: {{item.category}}</p>
+    </div>
+    <div class="col-8">
+      <span>{{item.description}}</span>
+    </div>
   </div>
-  <div class="col-8">
-    <span>{{item.description}}</span>
-  </div>
+
+
 </div>
