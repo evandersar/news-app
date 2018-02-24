@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { FormsModule } from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { routes } from "./app.routes";
 import { AppComponent } from './app.component';
@@ -23,7 +24,8 @@ import { ResolveDetailsService } from './resolve-details.service';
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgxPaginationModule
   ],
   providers: [
     NewsService, 

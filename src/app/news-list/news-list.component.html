@@ -2,16 +2,10 @@
 
   <div class="col-4">
     <label for="category">Category filter: </label>
-    <!-- <select class="form-control" name="category" id="category">
-      <option value="">--Select--</option>
-      <option value="health">Health</option>
-      <option value="life">Life</option>
-      <option value="food">Food</option>
-    </select> -->
-    <select class="form-control" name="category" id="category" [(ngModel)]="pagination.category">
-        <option *ngFor="let cat of categories" [value]="cat.value">  
+    <select class="form-control" name="category" id="category" [(ngModel)]="pagination.category" (change)="categoryChanged()">
+      <option *ngFor="let cat of categories" [value]="cat.value">
         {{cat.display}}
-        </option>
+      </option>
     </select>
   </div>
   <div class="col"></div>
@@ -24,7 +18,11 @@
 
 <div class="container-fluid">
 
-  <div *ngFor="let item of news" class="row list-item" routerLink="/news/{{item.id}}">
+  <div class="row list-item" routerLink="/news/{{item.id}}" *ngFor="let item of news | paginate: { 
+      itemsPerPage: pagination.ipp, 
+      currentPage: pagination.page, 
+      totalItems: pagination.total
+    }">
     <div class="col-4">
       <h4>{{item.title}}</h4>
       <p>Category: {{item.category}}</p>
@@ -34,5 +32,24 @@
     </div>
   </div>
 
-
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group row">
+        <label class="col-5 col-form-label-sm" for="ipp">Items per page: </label>
+        <div class="col-3">
+          <!-- <input type="number" min="1" step="1" id="ipp" class="form-control form-control-sm" [(ngModel)]="pagination.ipp"> -->
+          <select class="form-control form-control-sm" name="ipp" id="ipp" [(ngModel)]="pagination.ipp" (change)="ippChanged()">
+            <option *ngFor="let ipp of ipps" [value]="ipp">
+              {{ipp}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)" maxSize="7" directionLinks="true" autoHide="true"
+        previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+      </pagination-controls>
+    </div>
+  </div>
 </div>
