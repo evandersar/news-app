@@ -10,6 +10,15 @@ import { News } from '../news'
 })
 export class NewsListComponent implements OnInit {
   news: News[];
+  categories = [
+    { value: '', display: 'All' },
+    { value: 'health', display: 'Health' },
+    { value: 'life', display: 'Life' },
+    { value: 'food', display: 'Food' }
+  ];
+  pagination = {
+    category: ''
+  };
 
   constructor(private service: NewsService) { }
 

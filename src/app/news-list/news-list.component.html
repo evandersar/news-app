@@ -2,23 +2,29 @@
 
   <div class="col-4">
     <label for="category">Category filter: </label>
-    <select class="form-control" name="category" id="category">
+    <!-- <select class="form-control" name="category" id="category">
+      <option value="">--Select--</option>
       <option value="health">Health</option>
       <option value="life">Life</option>
       <option value="food">Food</option>
+    </select> -->
+    <select class="form-control" name="category" id="category" [(ngModel)]="pagination.category">
+        <option *ngFor="let cat of categories" [value]="cat.value">  
+        {{cat.display}}
+        </option>
     </select>
   </div>
   <div class="col"></div>
   <div class="col-3">
     <label for="">Create a new one</label>
-    <button class="btn btn-success btn-block">Add new</button>
+    <button class="btn btn-success btn-block" routerLink="/add">Add new</button>
   </div>
 
 </div>
 
 <div class="container-fluid">
 
-  <div *ngFor="let item of news" class="row list-item">
+  <div *ngFor="let item of news" class="row list-item" routerLink="/news/{{item.id}}">
     <div class="col-4">
       <h4>{{item.title}}</h4>
       <p>Category: {{item.category}}</p>
