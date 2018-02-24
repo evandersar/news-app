@@ -1,7 +1,24 @@
-<div *ngFor="let item of news" class="row">
+<div class="form-group row">
+  
+  <div class="col-4">
+    <label for="category">Category filter: </label>
+    <select class="form-control" name="category" id="category">
+      <option value="health">Health</option>
+      <option value="life">Life</option>
+      <option value="food">Food</option>
+    </select>
+  </div>
+  <div class="col"></div>
+  <div class="col-3">
+    <label for="">Create a new one</label>
+    <button class="btn btn-success btn-block">Add new</button>
+  </div>
+</div>
+
+<div *ngFor="let item of news" class="row list-item">
   <div class="col-4">
     <h4>{{item.title}}</h4>
-    <p>{{item.category}}</p>
+    <p>Category: {{item.category}}</p>
   </div>
   <div class="col-8">
     <span>{{item.description}}</span>
