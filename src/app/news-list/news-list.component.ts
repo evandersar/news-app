@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute } from '@angular/router';
 
 import { NewsService } from '../news.service';
 import { News } from '../news'
@@ -19,20 +20,15 @@ export class NewsListComponent implements OnInit {
     { value: 'food', display: 'Food' }
   ];
   ipps = [5, 10, 20];
-  pagination: Pagination = {
-    category: '',
-    page: 1,
-    ipp: 5,
-    total: 0,
-    loading: false
-  };
+  pagination: Pagination;
 
-  asyncNews: News[];
-
-  constructor(private service: NewsService) { }
+  constructor(private service: NewsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     //this.news = this.service.getNews();
+    this.activatedRoute.data.forEach((data: { paginationObj: Pagination }) => {
+      this.pagination = data.paginationObj;
+    });
     this.getPage();
   }
 
@@ -64,7 +60,7 @@ export class NewsListComponent implements OnInit {
       .subscribe(
         news => {
           console.log('news => ', news);
-          this.asyncNews = news;
+          this.news = news;
         },
         err => console.log(err)
       );
