@@ -7,12 +7,12 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { routes } from "./app.routes";
 import { AppComponent } from './app.component';
 import { NewsListComponent } from './news-list/news-list.component';
-import { NewsService } from './news.service';
-import { PaginationStateService } from './pagination-state.service';
+import { NewsService } from './shared/news.service';
+import { PaginationStateService } from './shared/pagination-state.service';
 import { CreateNewsComponent } from './create-news/create-news.component';
 import { NewsDetailsComponent } from './news-details/news-details.component';
-import { ResolveDetailsService } from './resolve-details.service';
-import { ResolveHomeService } from './resolve-home.service';
+import { ResolveDetailsService } from './shared/resolve-details.service';
+import { ResolveHomeService } from './shared/resolve-home.service';
 import { CanDeactivateGuard } from './shared/can-deactivate-guard.service';
 
 
@@ -31,7 +31,7 @@ import { CanDeactivateGuard } from './shared/can-deactivate-guard.service';
     ReactiveFormsModule
   ],
   providers: [
-    NewsService, 
+    NewsService,
     PaginationStateService,
     ResolveDetailsService,
     ResolveHomeService,

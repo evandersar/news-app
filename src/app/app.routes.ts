@@ -1,9 +1,9 @@
 import { Routes } from "@angular/router";
 import { NewsListComponent } from "./news-list/news-list.component";
 import { NewsDetailsComponent } from "./news-details/news-details.component";
-import { ResolveDetailsService } from "./resolve-details.service";
+import { ResolveDetailsService } from "./shared/resolve-details.service";
 import { CreateNewsComponent } from "./create-news/create-news.component";
-import { ResolveHomeService } from "./resolve-home.service";
+import { ResolveHomeService } from "./shared/resolve-home.service";
 import { CanDeactivateGuard } from "./shared/can-deactivate-guard.service";
 
 

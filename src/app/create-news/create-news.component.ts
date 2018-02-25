@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
-import { NewsService } from '../news.service';
+import { NewsService } from '../shared/news.service';
 import { Router } from '@angular/router';
 import { CanDeactivateGuard } from '../shared/can-deactivate-guard.service';
 
@@ -50,7 +50,7 @@ export class CreateNewsComponent implements OnInit, CanDeactivateGuard {
   // если метод вернет false пользователь получит уведомление с просьбой подтвердить переход
   // Данный метод будет использоваться при работе с CanDeactivateGuard (shared/can-deactivate-guard.service.ts)
   canDeactivate(): Promise<boolean> | boolean {
-    if (!this.createForm.value.title && !this.createForm.value.category 
+    if (!this.createForm.value.title && !this.createForm.value.category
       && !this.createForm.value.description || this.submitted) {
       return true;
     }

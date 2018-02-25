@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 
-import { NewsService } from '../news.service';
-import { News } from '../news'
-import { Pagination } from '../pagination';
+import { NewsService } from '../shared/news.service';
+import { News } from '../shared/news'
+import { Pagination } from '../shared/pagination';
 
 @Component({
   selector: 'app-news-list',
