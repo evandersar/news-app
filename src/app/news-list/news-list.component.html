@@ -1,6 +1,6 @@
 <div class="form-group row">
 
-  <div class="col-4">
+  <div class="col-6 col-md-3">
     <label for="category">Category filter: </label>
     <select class="form-control" name="category" id="category" [(ngModel)]="pagination.category" (change)="getPage()">
       <option *ngFor="let cat of categories" [value]="cat.value">
@@ -8,8 +8,7 @@
       </option>
     </select>
   </div>
-  <div class="col"></div>
-  <div class="col-3">
+  <div class="col-6 col-md-3 offset-md-6">
     <label for="">Create a new one</label>
     <button class="btn btn-success btn-block" routerLink="/add">Add new</button>
   </div>
@@ -23,20 +22,39 @@
       currentPage: pagination.page, 
       totalItems: pagination.total
     }">
-    <div class="col-4">
-      <h4>{{item.title}}</h4>
+    <div class="col-md-4 col-12">
+      <h5>{{item.title}}</h5>
       <p>Category: {{item.category}}</p>
     </div>
-    <div class="col-8">
+    <div class="col-md-8 col-12">
       <span>{{item.description}}</span>
     </div>
   </div>
 
-  <div class="row" style="margin-top:20px">
-    <div class="col-4">
+  <div class="row text-center">
+    <div class="col-md-8 offset-md-4 col-12">
+      <div [ngClass]="{ 'hidden': !pagination.loading }" class="lds-spinner">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-12">
       <div [hidden]="!pagination.total" class="form-group row">
-        <label class="col-5 col-form-label-sm" for="ipp">Items per page: </label>
-        <div class="col-3">
+        <label class="text-right col-md-7 col-6 col-form-label-sm" for="ipp">Items per page: </label>
+        <div class="col-md-5 col-4">
           <!-- <input type="number" min="1" step="1" id="ipp" class="form-control form-control-sm" [(ngModel)]="pagination.ipp"> -->
           <select class="form-control form-control-sm" name="ipp" id="ipp" [(ngModel)]="pagination.ipp" (change)="getPage()">
             <option *ngFor="let ipp of ipps" [ngValue]="ipp">
@@ -46,23 +64,7 @@
         </div>
       </div>
     </div>
-    <div class="col-2 text-center">
-        <div [ngClass]="{ 'hidden': !pagination.loading }" class="lds-spinner">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    <div class="col-6 text-center">
+    <div class="col-md-8 col-12 text-center">
       <pagination-controls [hidden]="!pagination.total" class="my-pagination" (pageChange)="pageChanged($event)" maxSize="7" directionLinks="true" autoHide="true"
         previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
       </pagination-controls>

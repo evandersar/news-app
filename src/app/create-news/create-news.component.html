@@ -3,7 +3,7 @@
 
   <div class="form-group row">
     <label class="col-2 col-form-label text-right" for="title">Title: </label>
-    <div class="col-4">
+    <div class="col-md-5 col-12">
       <input formControlName="title" type="text" id="title" class="form-control">
     </div>
     <div class="col">
@@ -15,7 +15,7 @@
 
   <div class="form-group row">
     <label class="col-2 col-form-label text-right" for="category">Category: </label>
-    <div class="col-4">
+    <div class="col-md-5 col-12">
       <select formControlName="category" class="form-control" name="category" id="category">
         <option *ngFor="let cat of categories" [value]="cat.value">
           {{cat.display}}
@@ -31,8 +31,8 @@
 
   <div class="form-group row">
     <label class="col-2 col-form-label text-right" for="description">Description: </label>
-    <div class="col-6">
-      <textarea formControlName="description" class="form-control" id="description" rows="5"></textarea>
+    <div class="col-md-5 col-12">
+      <textarea formControlName="description" class="form-control" id="description" rows="6"></textarea>
     </div>
     <div class="col">
       <p *ngIf="createForm.get('description').hasError('required') && createForm.get('description').touched" class="text-danger col-form-label">
