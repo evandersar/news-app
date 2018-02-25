@@ -18,7 +18,7 @@
 
 <div class="container-fluid">
 
-  <div class="row list-item" routerLink="/news/{{item.id}}" *ngFor="let item of news | paginate: { 
+  <div class="row list-item" routerLink="/news/{{item.id}}" *ngFor="let item of asyncNews | paginate: { 
       itemsPerPage: pagination.ipp, 
       currentPage: pagination.page, 
       totalItems: pagination.total
@@ -32,24 +32,41 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" style="margin-top:20px">
     <div class="col-4">
       <div class="form-group row">
         <label class="col-5 col-form-label-sm" for="ipp">Items per page: </label>
         <div class="col-3">
           <!-- <input type="number" min="1" step="1" id="ipp" class="form-control form-control-sm" [(ngModel)]="pagination.ipp"> -->
           <select class="form-control form-control-sm" name="ipp" id="ipp" [(ngModel)]="pagination.ipp" (change)="ippChanged()">
-            <option *ngFor="let ipp of ipps" [value]="ipp">
+            <option *ngFor="let ipp of ipps" [ngValue]="ipp">
               {{ipp}}
             </option>
           </select>
         </div>
       </div>
     </div>
-    <div class="col-8">
+    <div class="col-2 text-center">
+        <div [ngClass]="{ 'hidden': !pagination.loading }" class="lds-spinner">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    <div class="col-6 text-center">
       <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)" maxSize="7" directionLinks="true" autoHide="true"
         previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
       </pagination-controls>
     </div>
   </div>
+
 </div>

@@ -1,29 +1,52 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { News } from './news'
+import { IServerResponse } from './i-server-response';
+import { Pagination } from './pagination';
 
 @Injectable()
 export class NewsService {
 
-  constructor() { }
-  
 
-  public getNews(): News[]{
+  constructor() { }
+
+
+  public getNews(): News[] {
     return this.allNews;
   }
 
-  public getNewsById(id: number): News | null{
+  public getNewsById(id: number): News | null {
     let filteredNews = this.allNews.filter(item => item.id === id);
     return filteredNews[0] ? filteredNews[0] : null;
   }
 
-  public createNews(newsObj): News{
+  public createNews(newsObj): News {
     let initLength: number = this.allNews.length;
 
     newsObj.id = initLength + 1;
     this.allNews.push(newsObj);
 
     return this.allNews[initLength];
+  }
+
+  /**
+   * Simulate an async HTTP call with a delayed observable.
+   */
+  public serverCall(pagination: Pagination): Observable<IServerResponse> {
+    console.log('pagination => ', pagination);
+    /* {category: "", page: 3, ipp: "10", total: 50, loading: true} */
+    const perPage = pagination.ipp;
+    const start = (pagination.page - 1) * perPage;
+    const end = start + perPage;
+    let filteredItems = this.allNews;
+    if (pagination.category) filteredItems = this.allNews.filter(item => item.category === pagination.category);
+    console.log('perPage, start, end => ', perPage, start, end);
+    return Observable
+      .of({
+        items: filteredItems.slice(start, end),
+        total: filteredItems.length
+      }).delay(1000);
   }
 
 
