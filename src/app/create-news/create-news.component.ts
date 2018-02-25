@@ -45,10 +45,7 @@ export class CreateNewsComponent implements OnInit, CanDeactivateGuard {
   goHome(){
     this.router.navigate(['/home']);
   }
-  // метод для проверки возможности перенаправления пользователя на другой маршрут
-  // если метод возвращает true перенаправление возможно
-  // если метод вернет false пользователь получит уведомление с просьбой подтвердить переход
-  // Данный метод будет использоваться при работе с CanDeactivateGuard (shared/can-deactivate-guard.service.ts)
+  
   canDeactivate(): Promise<boolean> | boolean {
     if (!this.createForm.value.title && !this.createForm.value.category
       && !this.createForm.value.description || this.submitted) {
