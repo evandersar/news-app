@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { routes } from "./app.routes";
@@ -13,6 +13,7 @@ import { CreateNewsComponent } from './create-news/create-news.component';
 import { NewsDetailsComponent } from './news-details/news-details.component';
 import { ResolveDetailsService } from './resolve-details.service';
 import { ResolveHomeService } from './resolve-home.service';
+import { CanDeactivateGuard } from './shared/can-deactivate-guard.service';
 
 
 @NgModule({
@@ -26,13 +27,15 @@ import { ResolveHomeService } from './resolve-home.service';
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    NgxPaginationModule
+    NgxPaginationModule,
+    ReactiveFormsModule
   ],
   providers: [
     NewsService, 
     PaginationStateService,
     ResolveDetailsService,
-    ResolveHomeService
+    ResolveHomeService,
+    CanDeactivateGuard
   ],
   bootstrap: [AppComponent]
 })

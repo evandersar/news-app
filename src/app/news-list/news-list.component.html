@@ -2,7 +2,7 @@
 
   <div class="col-4">
     <label for="category">Category filter: </label>
-    <select class="form-control" name="category" id="category" [(ngModel)]="pagination.category" (change)="categoryChanged()">
+    <select class="form-control" name="category" id="category" [(ngModel)]="pagination.category" (change)="getPage()">
       <option *ngFor="let cat of categories" [value]="cat.value">
         {{cat.display}}
       </option>
@@ -38,7 +38,7 @@
         <label class="col-5 col-form-label-sm" for="ipp">Items per page: </label>
         <div class="col-3">
           <!-- <input type="number" min="1" step="1" id="ipp" class="form-control form-control-sm" [(ngModel)]="pagination.ipp"> -->
-          <select class="form-control form-control-sm" name="ipp" id="ipp" [(ngModel)]="pagination.ipp" (change)="ippChanged()">
+          <select class="form-control form-control-sm" name="ipp" id="ipp" [(ngModel)]="pagination.ipp" (change)="getPage()">
             <option *ngFor="let ipp of ipps" [ngValue]="ipp">
               {{ipp}}
             </option>

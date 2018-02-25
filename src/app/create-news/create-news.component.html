@@ -1,49 +1,50 @@
-<form>
+<h2 class="text-center" style="margin-bottom:20px">News creation form</h2>
+<form novalidate [formGroup]="createForm" (ngSubmit)="onSubmit(createForm)">
 
   <div class="form-group row">
-    <label class="col-1 col-form-label" for="title">Title: </label>
+    <label class="col-2 col-form-label text-right" for="title">Title: </label>
     <div class="col-4">
-      <input type="text" id="title" class="form-control">
+      <input formControlName="title" type="text" id="title" class="form-control">
     </div>
     <div class="col">
-      <p class="text-danger col-form-label">
+      <p *ngIf="createForm.get('title').hasError('required') && createForm.get('title').touched" class="text-danger col-form-label">
         Title field is required.
       </p>
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-1 col-form-label" for="category">Category: </label>
+    <label class="col-2 col-form-label text-right" for="category">Category: </label>
     <div class="col-4">
-      <select class="form-control" name="category" id="category">
-        <option value="health">Health</option>
-        <option value="life">Life</option>
-        <option value="food">Food</option>
+      <select formControlName="category" class="form-control" name="category" id="category">
+        <option *ngFor="let cat of categories" [value]="cat.value">
+          {{cat.display}}
+        </option>
       </select>
     </div>
     <div class="col">
-      <p class="text-danger col-form-label">
+      <p *ngIf="createForm.get('category').hasError('required') && createForm.get('category').touched" class="text-danger col-form-label">
         Category field is required.
       </p>
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-1 col-form-label" for="description">Description: </label>
-    <div class="col-4">
-      <textarea class="form-control" id="description" rows="5"></textarea>
+    <label class="col-2 col-form-label text-right" for="description">Description: </label>
+    <div class="col-6">
+      <textarea formControlName="description" class="form-control" id="description" rows="5"></textarea>
     </div>
     <div class="col">
-      <p class="text-danger col-form-label">
+      <p *ngIf="createForm.get('description').hasError('required') && createForm.get('description').touched" class="text-danger col-form-label">
         Description field is required.
       </p>
     </div>
   </div>
 
   <div class="form-group row">
-    <div class="col offset-1">
-      <button type="submit" class="btn btn-success">Save news</button>
-      <button type="button" class="btn btn-secondary" routerLink="/home"> Go back </button>
+    <div class="col offset-2">
+      <button type="submit" class="btn btn-success" [disabled]="createForm.invalid">Save news</button>
+      <button type="button" class="btn btn-secondary" (click)="goHome()"> Go back </button>
     </div>
   </div>
 

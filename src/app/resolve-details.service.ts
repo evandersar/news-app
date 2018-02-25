@@ -12,7 +12,8 @@ export class ResolveDetailsService implements Resolve<News>{
   resolve(route: ActivatedRouteSnapshot): News | any {
 
     let id = +route.params["id"];
-    let currNews = this.service.getNewsById(id);
+    //let currNews = this.service.getNewsById(id);
+    let currNews = this.service.serverOne(id);
 
     if (currNews) {
       return currNews;

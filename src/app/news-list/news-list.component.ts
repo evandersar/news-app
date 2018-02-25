@@ -34,32 +34,20 @@ export class NewsListComponent implements OnInit {
 
   pageChanged(page: number) {
     this.pagination.page = page;
-    console.log('this.pagination.page => ', this.pagination);
-    this.getPage();
-  }
-
-  categoryChanged() {
-    console.log('this.pagination.category => ', this.pagination);
-    this.getPage();
-  }
-
-  ippChanged() {
-    console.log('this.pagination.ipp => ', this.pagination);
     this.getPage();
   }
 
   getPage() {
     this.pagination.loading = true;
-    this.service.serverCall(this.pagination)
+    this.service.serverAll(this.pagination)
       .do(res => {
         this.pagination.total = res.total;
         this.pagination.loading = false;
-        console.log('this.pagination => ', this.pagination);
       })
       .map(res => res.items)
       .subscribe(
         news => {
-          console.log('news => ', news);
+          //console.log('news => ', news);
           this.news = news;
         },
         err => console.log(err)

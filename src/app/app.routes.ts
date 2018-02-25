@@ -4,6 +4,7 @@ import { NewsDetailsComponent } from "./news-details/news-details.component";
 import { ResolveDetailsService } from "./resolve-details.service";
 import { CreateNewsComponent } from "./create-news/create-news.component";
 import { ResolveHomeService } from "./resolve-home.service";
+import { CanDeactivateGuard } from "./shared/can-deactivate-guard.service";
 
 
 export const routes: Routes = [
@@ -28,7 +29,8 @@ export const routes: Routes = [
     },
     {
         path: "add",
-        component: CreateNewsComponent
+        component: CreateNewsComponent,
+        canDeactivate: [CanDeactivateGuard]
     },
     {
         path: "**",
