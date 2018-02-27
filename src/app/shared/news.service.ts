@@ -12,10 +12,9 @@ export class NewsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  apiEndpoint: string = 'https://my-json-server.typicode.com/evandersar/newsdb/news';
+  apiEndpoint: string = 'https://evandersar-news-data.herokuapp.com/news';
 
   public getNews(pagination: Pagination): Observable<any> {
-
     const params = pagination.category ?
       new HttpParams().set('category', `${pagination.category}`).set('_page', `${pagination.page}`).set('_limit', `${pagination.ipp}`) :
       new HttpParams().set('_page', `${pagination.page}`).set('_limit', `${pagination.ipp}`);
@@ -23,23 +22,13 @@ export class NewsService {
     return this.httpClient.get<News[]>(this.apiEndpoint, { params: params, observe: "response" });
   }
 
-
-  private handleError(error: any, cought: Observable<any>): any {
-    let message = "";
-
-    if (error instanceof Response) {
-      let errorData = error.json().error || JSON.stringify(error.json());
-      message = `${error.status} - ${error.statusText || ''} ${errorData}`
-    } else {
-      message = error.message ? error.message : error.toString();
-    }
-
-    console.error(message);
-
-    return Observable.throw(message);
+  public getOneNews(id: number): Observable<News>{
+    return this.httpClient.get<News>(`${this.apiEndpoint}/${id}`);
   }
 
-
+  public createNews(news: News): Observable<News>{
+    return this.httpClient.post<News>(this.apiEndpoint, news);
+  }
 
   /**
    * Simulate an async HTTP calls with a delayed observable.

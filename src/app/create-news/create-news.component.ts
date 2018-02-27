@@ -32,7 +32,7 @@ export class CreateNewsComponent implements OnInit, CanDeactivateGuard {
   onSubmit(form) {
     //console.log(form.valid);
     //console.log(form.value);
-    this.service.serverCreate(form.value).subscribe(
+    this.service.createNews(form.value).subscribe(
       news => {
         this.submitted = true;
         //console.log('news => ', news);

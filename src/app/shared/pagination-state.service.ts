@@ -7,7 +7,7 @@ export class PaginationStateService {
   pagination: Pagination = {
     category: '',
     page: 1,
-    ipp: 3,
+    ipp: 5,
     total: 0,
     loading: false
   };
