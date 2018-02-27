@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { routes } from "./app.routes";
@@ -28,7 +29,8 @@ import { CanDeactivateGuard } from './shared/can-deactivate-guard.service';
     FormsModule,
     RouterModule.forRoot(routes),
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     NewsService,

@@ -19,7 +19,7 @@ export class NewsListComponent implements OnInit {
     { value: 'life', display: 'Life' },
     { value: 'food', display: 'Food' }
   ];
-  ipps = [5, 10, 20];
+  ipps = [1, 3, 5];
   pagination: Pagination;
 
   constructor(private service: NewsService, private activatedRoute: ActivatedRoute) { }
@@ -29,12 +29,30 @@ export class NewsListComponent implements OnInit {
     this.activatedRoute.data.forEach((data: { paginationObj: Pagination }) => {
       this.pagination = data.paginationObj;
     });
-    this.getPage();
+    //this.getPage();
+    this.getNews();
+  }
+
+  getNews() {
+    this.pagination.loading = true;
+    this.service.getNews(this.pagination)
+      .subscribe(resp => {
+        // Here, resp is of type HttpResponse<MyJsonData>.
+        // You can inspect its headers:
+        console.log(resp.headers.get('x-total-count'));
+        // And access the body directly, which is typed as MyJsonData as requested.
+        console.log(resp.body);
+        this.pagination.loading = false;
+        this.pagination.total = resp.headers.get('x-total-count');
+        this.news = resp.body;
+      },
+        err => console.log(err)
+      );
   }
 
   pageChanged(page: number) {
     this.pagination.page = page;
-    this.getPage();
+    this.getNews();
   }
 
   getPage() {

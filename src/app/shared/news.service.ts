@@ -4,11 +4,42 @@ import { Observable } from 'rxjs/Observable';
 import { News } from './news'
 import { IServerResponse } from './i-server-response';
 import { Pagination } from './pagination';
+import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
+import { Response } from "@angular/http";
 
 @Injectable()
 export class NewsService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+
+  apiEndpoint: string = 'https://my-json-server.typicode.com/evandersar/newsdb/news';
+
+  public getNews(pagination: Pagination): Observable<any> {
+
+    const params = pagination.category ?
+      new HttpParams().set('category', `${pagination.category}`).set('_page', `${pagination.page}`).set('_limit', `${pagination.ipp}`) :
+      new HttpParams().set('_page', `${pagination.page}`).set('_limit', `${pagination.ipp}`);
+
+    return this.httpClient.get<News[]>(this.apiEndpoint, { params: params, observe: "response" });
+  }
+
+
+  private handleError(error: any, cought: Observable<any>): any {
+    let message = "";
+
+    if (error instanceof Response) {
+      let errorData = error.json().error || JSON.stringify(error.json());
+      message = `${error.status} - ${error.statusText || ''} ${errorData}`
+    } else {
+      message = error.message ? error.message : error.toString();
+    }
+
+    console.error(message);
+
+    return Observable.throw(message);
+  }
+
+
 
   /**
    * Simulate an async HTTP calls with a delayed observable.
@@ -19,7 +50,7 @@ export class NewsService {
     const end = start + perPage;
     let filteredItems = this.allNews;
     if (pagination.category) filteredItems = this.allNews.filter(item => item.category === pagination.category);
-    
+
     return Observable
       .of({
         items: filteredItems.slice(start, end),
