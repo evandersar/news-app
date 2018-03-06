@@ -15,6 +15,8 @@ import { NewsDetailsComponent } from './news-details/news-details.component';
 import { ResolveDetailsService } from './shared/resolve-details.service';
 import { ResolveHomeService } from './shared/resolve-home.service';
 import { CanDeactivateGuard } from './shared/can-deactivate-guard.service';
+import { NewsItemComponent } from './news-item/news-item.component';
+import { DisableControlDirective } from './shared/disable-control.directive';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { CanDeactivateGuard } from './shared/can-deactivate-guard.service';
     AppComponent,
     NewsListComponent,
     CreateNewsComponent,
-    NewsDetailsComponent
+    NewsDetailsComponent,
+    NewsItemComponent,
+    DisableControlDirective
   ],
   imports: [
     BrowserModule,

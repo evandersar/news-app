@@ -30,6 +30,10 @@ export class NewsService {
     return this.httpClient.post<News>(this.apiEndpoint, news);
   }
 
+  public updateNews(news: News, id: number): Observable<News>{
+    return this.httpClient.put<News>(`${this.apiEndpoint}/${id}`, news);
+  }
+
   /**
    * Simulate an async HTTP calls with a delayed observable.
    */

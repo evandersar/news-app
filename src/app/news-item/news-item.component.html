@@ -1,0 +1,53 @@
+<h2 class="text-center" style="margin-bottom:20px">{{title}}</h2>
+<form novalidate [formGroup]="createForm" (ngSubmit)="onSubmit(createForm)">
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label text-right" for="title">Title: </label>
+    <div class="col-md-5 col-12">
+      <input formControlName="title" [disableControl]="isDisabled" type="text" id="title" class="form-control">
+    </div>
+    <div class="col">
+      <p *ngIf="createForm.get('title').hasError('required') && createForm.get('title').touched" class="text-danger col-form-label">
+        Title field is required.
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label text-right" for="category">Category: </label>
+    <div class="col-md-5 col-12">
+      <select formControlName="category" [disableControl]="isDisabled" class="form-control" name="category" id="category">
+        <option *ngFor="let cat of categories" [value]="cat.value">
+          {{cat.display}}
+        </option>
+      </select>
+    </div>
+    <div class="col">
+      <p *ngIf="createForm.get('category').hasError('required') && createForm.get('category').touched" class="text-danger col-form-label">
+        Category field is required.
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label text-right" for="description">Description: </label>
+    <div class="col-md-5 col-12">
+      <textarea formControlName="description" [disableControl]="isDisabled" class="form-control" id="description" rows="6"></textarea>
+    </div>
+    <div class="col">
+      <p *ngIf="createForm.get('description').hasError('required') && createForm.get('description').touched" class="text-danger col-form-label">
+        Description field is required.
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col offset-2">
+      <button type="button" class="btn btn-secondary" (click)="goHome()"> Go back </button>
+      <button *ngIf="isCreateMode" type="submit" class="btn btn-success" [disabled]="createForm.invalid">Save</button>
+      <button *ngIf="!isCreateMode && isDisabled" type="button" class="btn btn-info" (click)="isDisabled=false">Edit</button>
+      <button *ngIf="!isCreateMode && !isDisabled" type="submit" class="btn btn-primary" [disabled]="createForm.invalid">Update</button>
+    </div>
+  </div>
+
+</form>

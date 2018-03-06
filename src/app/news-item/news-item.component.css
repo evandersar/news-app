@@ -1,0 +1,11 @@
+.ng-valid:not(form)  {
+    border-bottom: 3px solid mediumseagreen; 
+  }
+  
+.ng-invalid:not(form) {
+    border-bottom: 3px solid red; 
+}
+
+.ng-untouched:not(form) {
+    border-bottom: 3px solid grey; 
+}
